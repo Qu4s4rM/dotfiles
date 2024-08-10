@@ -1,0 +1,114 @@
+* {
+    border: none;
+    border-radius: 0px;
+    /*font-family: VictorMono, Iosevka Nerd Font, Noto Sans CJK;*/
+    font-family: "Maple Mono SC NF", "Symbols Nerd Font"/*, "bargraph"*/;
+    font-size: 10px;
+    font-style: normal;
+    min-height: 0;
+}
+
+window#waybar {
+    background: transparent;
+    color: #cdd6f4
+}
+
+#workspaces {
+    background: transparent;
+    padding: 4px 2px;
+    border-radius: 10px;
+    border: solid 0px #ffffff;
+    font-weight: normal;
+    font-style: normal;
+}
+#workspaces button {
+    padding: 0px 5px;
+    margin: 0px 2px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button.active {
+    background-color: #DC143C;
+    min-width: 40px;
+    background-size: 400% 400%;
+    transition: all 0.3s ease-in-out;
+}
+
+#workspaces button:hover {
+    /*
+    background-color: #cdd6f4;
+    color: #cdd6f4;
+    */
+    background: #DC143C;
+    background: radial-gradient(circle, #DC143C 35%, rgba(197,0,109,1) 87%, rgba(247,143,219,1) 100%);
+    border-radius: 10px;
+    min-width: 40px;
+    background-size: 400% 400%;
+}
+
+#clock {
+    color: #cdd6f4;
+    font-size: 14px;
+    border-radius: 10px;
+    margin-right: 0px;
+    margin-left: 10px;
+    font-weight: bold;
+    /*border-left: solid 1px #282738;*/
+}
+.modules-right {
+    margin-right: 10px;
+    padding: 0px 10px;
+    border-radius: 10px;
+    border: 2px solid #ffffff;
+}
+
+#battery {
+    font-size: 14px;
+    color: #ffffff;
+}
+
+#battery.charging {
+    color: #9ece6a;
+}
+
+#battery.warning:not(.charging) {
+    background-color: #f7768e;
+    color: #24283b;
+    border-radius: 5px 5px 5px 5px;
+}
+#network {
+    font-size: 14px;
+    color: #ffffff;
+}
+#custom-cava {
+    color: #8FBC8F;
+    border-left: 0px;
+    border-right: 0px;
+    padding-bottom: 6px;
+    font-family: "bargraph";
+    font-size: 22px;
+}
+#window {
+    background: #0c0e0f;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 10px;
+    /*border-left: solid 1px #282738;*/
+    /*border-right: solid 1px #282738;*/
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: normal;
+    font-style: normal;
+}
+#pulseaudio {
+    font-size: 17px;
+    color: #ffffff;
+    margin: 0px 10px;
+}
+#custom-power {
+    font-size: 14px;
+    color: #ffffff;
+    margin-left: 10px;
+}
