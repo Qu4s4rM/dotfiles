@@ -1,0 +1,103 @@
+;; Profile vars
+(defvar IMAGE "images/blackhole.jpg")
+
+;; Time vars
+(defpoll MER :interval "5s" `date +\"%p\"`)
+(defpoll TIME :interval "1s" "date +'%I:%M'")
+(defpoll DATE :interval "1s" "date +'%d %b %y'")
+(defpoll DAY :interval "1s" "date +'%A'")
+
+(defpoll volume :interval "1s" "scripts/volume.sh")
+(defpoll brightness :interval "1s" "scripts/brightness.sh")
+
+(defpoll player-name :interval "1s" "scripts/musicArt.sh --player-name")
+(defpoll player-art :interval "1s" "scripts/musicArt.sh --art")
+(defpoll player-title :interval "1s" "scripts/musicInfo.sh --status")
+(defpoll player-artist :interval "1s" "scripts/musicArtist.sh")
+(defpoll player-icon :interval "1s" "scripts/musicInfo.sh --icon")
+
+;; system menu
+(defwidget system-menu [] 
+  (box :class "system-menu-box" :space-evenly "false" :orientation "v"
+    (box :class "top-row" :space-evenly false
+     (label :class "time" :text TIME)
+     (box :class "date-box" :orientation "v" :space-evenly "false" :spacing 5
+        (label :class "date" :text DATE)
+        (label :class "day" :halign "start" :text DAY))
+     (box :class "profile-image" :space-evenly false :style "background-image: url('${IMAGE}');")
+     ); :tooltip profile-name
+     (box :class "first-row-system" :hexpand "false" :vexpand "false" :space-evenly "false" :spacing 0
+        (box :class "wifi-box" :space-evenly "false" :orientation "v" :hexpand "false" :vexpand "false"
+          (box :class "wifi-buttons-box" :space-evenly "false"
+            (button :class "wifi-button" :onclick "bash ~/.config/eww/panel/widgets/wifi/rofi-wifi-menu.sh" " ")
+          )
+          (label :class "wifi-label" :tooltip "Wi-Fi: 10" :text "Wifi" :limit-width 9)
+        )
+        (box :class "bluetooth-box" :space-evenly "false" :orientation "v" :hexpand "false" :vexpand "false"
+          (box :class "bluetooth-buttons-box" :space-evenly "false"
+            (button :class "bluetooth-button" :onclick "bash ~/.config/eww/panel/panel_widget.sh bluetooth" "󰂯")
+          )
+          (label :class "bluetooth-label" :tooltip "Bluetooth: 10" :text "Bluetooth" :limit-width 9)
+        )
+        (box :class "nightlight-box" :space-evenly "false" :orientation "v" :hexpand "false" :vexpand "false"
+          (box :class "nightlight-buttons-box" :space-evenly "false"
+            (button :class "nightlight-button" "")
+          )
+          (label :class "nightlight-label" :tooltip "Night Light: 10" :text "Night Light" :limit-width 9)
+        )
+     )
+     (box :class "sliders" :space-evenly "false" :orientation "v" :spacing 15
+        (box :orientation "h" :class "volume-slider-stuff" :space-evenly "false"
+          (button :onclick "amixer set Master toggle" :class "volume-slider-icon" "󰕾")
+          (scale :class "volume-slider"
+            :value 100
+            :orientation "h"
+            :width 220
+            :marks true
+            :max 100
+            :min 0
+            :onchange "amixer sset Master {}%"
+          )
+          (label :tooltip "No further configuration available for this applet." :class "volume-slider-button" :text "")
+        )
+        (box :orientation "h" :class "brightness-slider-stuff" :space-evenly "false"
+          (button :class "brightness-slider-icon" "󰃠")
+          (scale :class "brightness-slider"
+            :orientation "h"
+            :max 100
+            :min 0
+            :value 100
+            :width 220
+            :marks true
+            :onchange "brightnessctl set {}%")
+          (label :tooltip "No further configuration available for this applet." :class "brightness-slider-button" :text "")
+        )
+     )
+     (box :class "music-player-container" :orientation "v" :space-evenly "false"
+        (box :class "music-player-box" :hexpand "false" :vexpand "false" :space-evenly "false"
+          (box :class "music-player-album" :space-evenly "false" :style "background-image: url('${player-art}');")
+          (box :class "music-player-info-box" :space-evenly "true" :orientation "v"
+            (box :class "music-player-info" :space-evenly "false" :halign "start" :orientation "v"
+              (box :class "music-player-name-box" :space-evenly "false"
+                (label :class "music-player-name-icon" :text player-icon)
+                (label :class "music-player-name" :text "${player-name == "" ? "No player found" : player-name}")))
+            (box :class "music-player-info-more-box" :orientation "v" :space-evenly "false"
+              (label :class "music-player-title" :halign "start" :limit-width 20 :text player-title)
+              (label :class "music-player-artist" :halign "start" :limit-width 20 :text player-artist))))
+        (box :class "player-buttons-box" :space-evenly "true"
+          (button :class "player-prev" :onclick "playerctl previous" "󰒮")
+          (button :class "player-pp" :onclick "playerctl play-pause" "${player-icon}")
+          (button :class "player-next" :onclick "playerctl next" "󰒭")
+        )
+     )
+
+  )
+) 
+
+;; Windows ;;
+
+(defwindow systemmenu :stacking "fg"
+  :monitor 0
+  :wm-ignore true
+  :geometry (geometry :x 10 :y 10 :width "25%" :height "60%" :anchor "right top")
+  (system-menu))
