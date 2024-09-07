@@ -3,44 +3,42 @@
     border: none;
     border-radius: 0px;
     font-family: "Ubuntu Nerd Font", "Symbols Nerd Font", "bargraph";
-    font-size: 10px;
-    font-style: normal;
     min-height: 0;
 }
 
 window#waybar {
-    background: transparent;
-    color: #cdd6f4
+    background: rgba(28,28,28,0.6);
 }
-
 #workspaces {
-    background: transparent;
-    padding: 6px 0px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 8px;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 4px 4px;
 }
 #workspaces button {
+    font-size: 6px;
     padding: 0px 0px;
     margin: 0px 2px;
-    border-radius: 2px;
-    background-color: #ffffff;
-    transition: all 0.3s ease-in-out;
+    border-radius: 10px;
+    background: #fdc1cd;
+    transition: 0.3s;
+    border: 0px solid transparent;
 }
 
 #workspaces button.active {
-    background-color: #DC143C;
+    background: #DC143C;
     min-width: 30px;
-    background-size: 300% 300%;
-    transition: all 0.3s ease-in-out;
+    background-size: 100% 100%;
+    transition: 0.3s;
 }
 
 #workspaces button:hover {
-    /*
-    background-color: #cdd6f4;
-    color: #cdd6f4;
-    */
-    background: #DC143C;
+    color: #DC143C;
     background: radial-gradient(circle, #DC143C 35%, rgba(197,0,109,1) 87%, rgba(247,143,219,1) 100%);
     min-width: 30px;
-    background-size: 300% 300%;
+    transition: 0.3s;
 }
 
 #clock {
@@ -54,10 +52,12 @@ window#waybar {
 #battery {
     font-size: 14px;
     color: #ffffff;
-    background: #DC143C;
     padding: 0px 5px;
-    margin: 0px 6px;
     border-radius: 2px;
+    transition: 0.3s;
+}
+#battery:hover {
+    background: rgba(20,20,20,1);
 }
 
 #battery.charging {
@@ -81,22 +81,6 @@ window#waybar {
     animation-iteration-count: infinite;
     animation-direction: alternate;
 }
-#network {
-    font-size: 14px;
-    color: #ffffff;
-    background: #DC143C;
-    padding: 0px 5px;
-    margin: 0px 6px;
-    border-radius: 2px;
-}
-#custom-cava {
-    color: #8FBC8F;
-    border-left: 0px;
-    border-right: 0px;
-    padding-bottom: 6px;
-    font-family: "bargraph";
-    font-size: 22px;
-}
 #window {
     background: #0c0e0f;
     padding-left: 15px;
@@ -108,30 +92,6 @@ window#waybar {
     margin-bottom: 5px;
     font-weight: normal;
     font-style: normal;
-}
-#cpu {
-    font-size: 14px;
-    color: #ffffff;
-    background: #24283b;
-    padding: 0px 5px;
-    margin: 0px;
-    border-radius: 2px;
-}
-#memory {
-    font-size: 14px;
-    color: #ffffff;
-    background: #24283b;
-    padding: 0px 5px;
-    margin: 0px 6px;
-    border-radius: 2px;
-}
-#temperature {
-    font-size: 14px;
-    color: #ffffff;
-    background: #24283b;
-    padding: 0px 5px;
-    margin: 0px;
-    border-radius: 2px;
 }
 #pulseaudio {
     font-size: 18px;
@@ -145,18 +105,12 @@ window#waybar {
 #custom-power {
     font-size: 14px;
     color: #ffffff;
-    background: #DC143C;
     padding: 0px 5px;
     margin-right: 10px;
     border-radius: 2px;
 }
-#custom-launcher {
-    font-size: 14px;
-    color: #ffffff;
-    background: #DC143C;
-    padding: 0px 7px 0px 5px;
-    margin: 0px 4px 0px 10px;
-    border-radius: 2px;
+#custom-power:hover {
+    background: rgba(20,20,20,1);
 }
 #custom-spotify {
     font-size: 14px;
@@ -169,8 +123,20 @@ window#waybar {
 #custom-notification {
     font-size: 14px;
     color: #ffffff;
-    background: #DC143C;
     padding: 0px 7px 0px 5px;
-    margin: 0px 6px 0px 0px;
+    margin: 0px;
     border-radius: 2px;
+}
+#custom-notification:hover {
+    background: rgba(20,20,20,1);
+}
+#custom-panel {
+    font-size: 14px;
+    color: #ffffff;
+    padding: 0px 5px 0px 5px;
+    margin: 0px;
+    border-radius: 2px;
+}
+#custom-panel:hover {
+    background: rgba(20,20,20,1);
 }

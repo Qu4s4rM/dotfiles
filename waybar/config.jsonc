@@ -2,17 +2,15 @@
     // General Settings
     "layer": "top",
     "position": "top",
-    "margin-top": 8,
+    "margin-top": 0,
     "margin-bottom": 0,
     "margin-left": 0,
-    "margin-right": 0,    
+    "margin-right": 0, 
     "spacing": 0,
 
     // Modules Left
     "modules-left": [
-        "custom/launcher",
-        "hyprland/workspaces",
-        "custom/spotify"
+        "hyprland/workspaces"
     ],
 
     // Modules Center
@@ -21,13 +19,8 @@
     ],
 
     // Modules Right    
-    "modules-right": [ 
+    "modules-right": [
         "custom/panel",
-        "cpu",
-        "memory",
-        "temperature",
-        "network",
-        "pulseaudio",
         "battery",
         "custom/notification",
         "custom/power"
@@ -84,9 +77,10 @@
             "warning": 30,
             "critical": 15
         },
-        "format": "<span foreground='#6D8895'>{icon}</span>",
-        "format-charging": "{icon} {capacity}%",
-        "format-plugged": "{capacity}% ",
+        //"tooltip-format": "{icon} {time} {capacity}%",
+        "format": "{icon}",
+        "format-charging": "{icon}",
+        "format-plugged": "{capacity}%",
         "format-alt": "{icon} {time} {capacity}%",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
@@ -219,7 +213,8 @@
         "on-click-right": "swaync-client -d -sw"
 	},
     "custom/panel": {
-        "format": "Hola",
+        "format": "{icon}",
+        "format-icons": [""],
         "on-click": "~/.config/eww/panel/panel_widget.sh panel"
     }
 }
