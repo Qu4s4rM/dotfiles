@@ -53,3 +53,4 @@ case "$1" in
   --icon) get_icon ;;
   --name) get_name ;;
   --toggle) toggle ;;
+esac
