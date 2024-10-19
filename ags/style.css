@@ -1,0 +1,92 @@
+window.bar {
+    background-color: #100d10;
+}
+window.corner-screen {
+    background: transparent;
+}
+
+label {
+    font-weight: bold;
+}
+.workspaces {
+    margin: 4px 0px;
+    background: #231e22;
+    border-radius: 10px;
+    padding: 0px 4px;
+}
+.workspaces button {
+    all: unset;
+    margin: 0px 4px;
+    color: #505050;
+}
+
+.workspaces button.focused {
+    color: #ffffff;
+}
+.workspaces button:hover {
+    color: #ffffff;
+}
+
+.notification {
+    color: yellow;
+}
+
+levelbar block,
+highlight {
+    min-height: 10px;
+}
+
+
+.clock {
+    color: #ffffff;
+}
+.clock .clock-point {
+    font-size: 20px;
+}
+.clock .clock-calendar {
+    font-size: 14px;
+}
+.app-launcher-box {
+    padding: 0px 20px;
+}
+.app-launcher-box .domain {
+    color: #505050;
+    font-size: 10px;
+}
+.app-launcher-box .app-launcher-btn {
+    all: unset;
+    color: #ffffff;
+    font-size: 14px;
+    font-family: 'Ubuntu';
+}
+.menu-shortcuts {
+    margin: 4px 0px;
+    background: #231e22;
+    border-radius: 10px;
+    padding: 2px 4px;
+}
+.menu-shortcuts .menu-shortcuts-btn {
+    all: unset;
+    border-radius: 50%;
+    background: #52434b;
+    padding: 0px 4px;
+}
+.battery-box {
+    margin: 4px 0px;
+    background: #231e22;
+    border-radius: 10px;
+    padding: 2px 4px;
+    color: #ffffff;
+}
+.menu-box {
+    all: unset;
+    margin: 4px 10px 4px 0px;
+    /*background: #3c373a; Moment*/ 
+    background: #645c61;
+    border-radius: 10px;
+    padding: 0px 10px;
+    transition: all 300ms;
+}
+.menu-box:hover {
+    opacity: 0.8;
+}
