@@ -178,6 +178,9 @@ function MenuShortcuts() {
                     icon: 'tool-pencil-symbolic',
                     size: 12,
                 }),
+                onClicked: () => Utils.execAsync(['hyprpicker'])
+                    .then(out => print(out))
+                    .catch(err => print(err)),
             }),
             Widget.Button({
                 class_name: "menu-shortcuts-btn",
@@ -187,6 +190,9 @@ function MenuShortcuts() {
                     icon: 'input-keyboard-symbolic',
                     size: 12,
                 }),
+                onClicked: () => Utils.execAsync(['bash', '~/.config/ags/panels/launchss.sh'])
+                    .then(out => print(out))
+                    .catch(err => print(err)),
             }),
         ],
     })
@@ -228,7 +234,6 @@ function BatteryHealth() {
 function Menu() {
     return Widget.Button({
         class_name: "menu-box",
-        cursor: "pointer",
         child: Widget.Box({
             spacing: 8,
             children: [
@@ -249,6 +254,8 @@ function Menu() {
                 }),
             ],
         }),
+        //onClicked: () => Utils.exec(`bash -c "~/.config/ags/panels/launch.sh launchsidebar"`),
+        onClicked: () => Utils.execAsync(['bash', '-c', '~/.config/ags/panels/launch.sh launchsidebar']),
     })
 }
 
