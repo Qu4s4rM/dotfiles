@@ -1,0 +1,50 @@
+window.osd {
+    background: transparent;
+}
+
+.box-vol {
+    background: #100d10;
+    margin: 200px 10px 200px 0px;
+    padding: 10px;
+    border-radius: 14px;
+    font-weight: bold;
+}
+
+
+levelbar block,
+highlight {
+    min-width: 20px;
+    background: #505050;
+    color: #505050;
+    border: none;
+    border-radius: 10px;
+}
+trough {
+    background: #100d10;
+    color: #505050;
+    border-radius: 10px;
+}
+
+/*   -------------------------------------------   */
+window.sidebar {
+    background: transparent;
+    border: none;
+}
+.center-box-sidebar {
+    background: #100d10;
+    margin: 10px 10px 10px 0px;
+    border-radius: 14px;
+}
+
+.sidebar-menu {
+    padding: 20px;
+}
+.sidebar-menu .sidebar-menu-child .sidebar-menu-child-btn {
+    all: unset;
+    background: #231e22;
+    padding: 10px 20px;
+    border-radius: 14px;
+}
+.sidebar-menu .sidebar-menu-child .sidebar-menu-child-btn:hover {
+    background: #505050;
+}
