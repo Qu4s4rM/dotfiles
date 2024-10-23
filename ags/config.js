@@ -234,6 +234,7 @@ function BatteryHealth() {
 function Menu() {
     return Widget.Button({
         class_name: "menu-box",
+        cursor: "pointer",
         child: Widget.Box({
             spacing: 8,
             children: [
