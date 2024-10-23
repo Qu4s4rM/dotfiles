@@ -118,8 +118,6 @@ function Panel(monitor = 0) {
         name: WINDOW_NAME, // name has to be unique
         setup: self => self.keybind("Escape", () => {
             App.closeWindow(WINDOW_NAME)
-            //const value = Utils.exec(`bash -c "amixer -D pulse sset Master 10%+ > /dev/null"`)
-            //console.log(value)
             Utils.execAsync(['bash', '-c', '~/.config/ags/panels/launch.sh launchvol'])
         }),
         class_name: "osd",

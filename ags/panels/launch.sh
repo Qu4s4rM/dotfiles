@@ -30,4 +30,6 @@ case $1 in
     launchsidebar)
     launch_sidebar
 	;;
+    launchwlogout)
+    bash ~/.config/wlogout/launch.sh
 esac

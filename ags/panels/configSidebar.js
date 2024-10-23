@@ -1,30 +1,7 @@
-const hyprland = await Service.import("hyprland")
 const notifications = await Service.import("notifications")
-const mpris = await Service.import("mpris")
-const audio = await Service.import("audio")
-const battery = await Service.import("battery")
-const systemtray = await Service.import("systemtray")
 
 const WINDOW_NAME = "sidebar"
 
-
-// we don't need dunst or any other notification daemon
-// because the Notifications module is a notification daemon itself
-function Notification() {
-    const popups = notifications.bind("popups")
-    return Widget.Box({
-        class_name: "notification",
-        visible: popups.as(p => p.length > 0),
-        children: [
-            Widget.Icon({
-                icon: "preferences-system-notifications-symbolic",
-            }),
-            Widget.Label({
-                label: popups.as(p => p[0]?.summary || ""),
-            }),
-        ],
-    })
-}
 
 
 function Media() {
@@ -92,7 +69,57 @@ function MenuSidebar(){
         ],
     })
 }
-
+function MenuNotification(){
+    const popups = notifications.bind("popups")
+    return Widget.Box({
+        class_name: "notification-menu",
+        vertical: true,
+        spacing: 10,
+        hexpand: true,
+        children: [
+            Widget.Label("HOLA"),
+            Widget.Label("HOLA"),
+            Widget.Label("HOLA"),
+            Widget.Label("HOLA"),
+            Widget.Label("HOLA"),
+            Widget.Label("HOLA"),
+            Widget.Label("HOLA"),
+            Widget.Label("HOLA"),
+            Widget.Label("HOLA"),
+            Widget.Label("HOLA"),
+            Widget.Label("HOLA"),
+            Widget.Label("HOLA"),
+            Widget.Label("HOLA"),
+            Widget.Label("HOLA"),
+        ],
+    })
+}
+function MenuOptions(){
+    return Widget.Box({
+        class_name: "options-menu",
+        spacing: 10,
+        hpack: "center",
+        hexpand: true,
+        children: [
+            Widget.Button({
+                class_name: "options-menu-btn",
+                child: Widget.Icon({
+                    icon: "preferences-system-notifications-symbolic",
+                    size: 20,
+                }),
+                onClicked: () => Utils.execAsync(['bash', '-c', '~/.config/ags/panels/launch.sh launchwlogout']),
+            }),
+            Widget.Button({
+                class_name: "options-menu-btn",
+                child: Widget.Icon({
+                    icon: "preferences-system-notifications-symbolic",
+                    size: 20,
+                }),
+                onClicked: () => Utils.execAsync(['bash', '-c', '~/.config/ags/panels/launch.sh launchwlogout']),
+            }),
+        ],
+    })
+}
 
 
 // layout of the bar
@@ -109,19 +136,16 @@ function Center() {
     return Widget.Box({
         spacing: 8,
         children: [
-            MenuShortcuts(),
-            Clock(),
-            BatteryHealth(),
+            MenuNotification(),
         ],
     })
 }
 
-function Right() {
+function Bottom() {
     return Widget.Box({
-        class_name: "box-vol",
         spacing: 8,
         children: [
-            Volume(),
+            MenuOptions(),
         ],
     })
 }
@@ -131,6 +155,7 @@ function Sidebar(monitor = 0) {
         name: WINDOW_NAME, // name has to be unique
         setup: self => self.keybind("Escape", () => {
             App.closeWindow(WINDOW_NAME)
+            Utils.execAsync(['bash', '-c', '~/.config/ags/panels/launch.sh launchsidebar'])
         }),
         class_name: "sidebar",
         monitor,
@@ -141,7 +166,9 @@ function Sidebar(monitor = 0) {
             class_name: "center-box-sidebar",
             vertical: true,
             start_widget: Top(),
-        }),
+            center_widget: Center(),
+            end_widget: Bottom(),
+        })
         
     })
 }
