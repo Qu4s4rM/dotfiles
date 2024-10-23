@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Proteus 8.13
+Exec=bash -c /home/qu4s4r/.config/bin/launcherApps/launchProteus.sh
+Terminal=false
+Type=Application
+Icon=0D47_PDS.0
