@@ -8,8 +8,7 @@
   <img src="https://img.shields.io/github/stars/camilafernanda?style=social">
 </p>
 <p align="center">
-  <img src="![Desktop](https://github.com/user-attachments/assets/1cb43aa5-3dde-493a-8abc-974d0555b716)
-">
+  <img src="https://github.com/user-attachments/assets/1cb43aa5-3dde-493a-8abc-974d0555b716">
   
   
 </p>
