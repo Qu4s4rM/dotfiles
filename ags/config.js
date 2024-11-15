@@ -4,12 +4,24 @@ const mpris = await Service.import("mpris")
 const audio = await Service.import("audio")
 const battery = await Service.import("battery")
 
+const percentageBattery = Variable("",{
+    poll: [1000, `bash -c "~/.config/ags/scripts/battery-info.sh getpercentage"`]
+})
+const iconBattery = Variable("",{
+    poll: [1000, `bash -c "~/.config/ags/scripts/battery-info.sh geticon"`]
+})
 const date = Variable("", {
     poll: [1000, 'date "+%H:%M"'],
 })
 const point = Variable(" · ")
 const calendar = Variable("", {
     poll: [1000, 'date "+%A, %d/%m"'],
+})
+const iconWifi = Variable("",{
+    poll: [1000, `bash -c "~/.config/ags/scripts/network-info.sh geticon"`]
+})
+const iconBluetooth = Variable("",{
+    poll: [1000, `bash -c "~/.config/ags/scripts/bluetooth-info.sh geticon"`]
 })
 
 // widgets can be only assigned as a child in one container
@@ -25,7 +37,7 @@ function Workspaces() {
             child: Widget.Label(`${id}`),
             class_name: activeId.as(i => `${i === id ? "focused" : ""}`),
             cursor: "pointer",
-            onClicked: () => dispatch(i),
+            onClicked: () => hyprland.messageAsync(`dispatch workspace ${id}`),
         })))
 
     return Widget.Box({
@@ -68,7 +80,7 @@ function AppLauncher() {
                 hpack: "start",
                 cursor: "pointer",
                 child: Widget.Label('Apps'),
-                onClicked: () => Utils.execAsync(['bash', '-c', '~/.config/rofi/launcher/launch.sh'])
+                onClicked: () => Utils.execAsync(['bash', '-c', 'bash ~/.config/rofi/launcher/launch.sh'])
                     .then(out => print(out))
                     .catch(err => print(err)),
             }),
@@ -165,7 +177,7 @@ function MenuShortcuts() {
                     icon: 'org.flameshot.Flameshot',
                     size: 12,
                 }),
-                onClicked: () => Utils.execAsync(['flameshot', 'gui'])
+                onClicked: () => Utils.execAsync(['bash', '-c', 'flameshot gui'])
                     .then(out => print(out))
                     .catch(err => print(err)),
             }),
@@ -174,10 +186,10 @@ function MenuShortcuts() {
                 cursor: "pointer",
                 child: Widget.Icon({
                     class_name: "menu-shortcuts-btn-icon", 
-                    icon: 'tool-pencil-symbolic',
+                    icon: 'color-picker-2',
                     size: 12,
                 }),
-                onClicked: () => Utils.execAsync(['hyprpicker'])
+                onClicked: () => Utils.execAsync(['bash', '-c', 'hyprpicker -f hex | cat | wl-copy'])
                     .then(out => print(out))
                     .catch(err => print(err)),
             }),
@@ -189,7 +201,7 @@ function MenuShortcuts() {
                     icon: 'input-keyboard-symbolic',
                     size: 12,
                 }),
-                onClicked: () => Utils.execAsync(['bash', '~/.config/ags/panels/launchss.sh'])
+                onClicked: () => Utils.execAsync(['bash', '~/.config/ags/launchss.sh'])
                     .then(out => print(out))
                     .catch(err => print(err)),
             }),
@@ -197,33 +209,21 @@ function MenuShortcuts() {
     })
 }
 function BatteryHealth() {
-    /*const value = Utils.interval(1000, () => {
-        var hola = Utils.exec(`bash -c "for dispositivo in $(upower -e); do upower -i $dispositivo; done | grep percentage | head -n 1 | awk '{print $2}'"`)
-        Utils.execAsync(['bash', '-c', '~/.config/bin/battery.sh'])
-            .then(out => print(out))
-            .catch(err => print(err))
-        console.log(hola)
-      })
-    */
-    const icon = battery.bind("percent").as(p =>
-        `battery-level-${Math.floor(p / 10) * 10}-symbolic`)
-    
+    /*const icon = percentageBattery.bind("value").as(p =>
+        `battery-level-${Math.floor(p / 6 * 6)}`
+    )*/
+
     return Widget.Box({
         class_name: "battery-box",
         spacing: 4,
         children: [
             Widget.Icon({
                 class_name: "battery-box-btn-icon", 
-                icon: icon,
-                size: 14
+                icon: iconBattery.bind(),
+                size: 20,
             }),
             Widget.Label({
-                label: `${
-                    Utils.interval(1000, () => {
-                        var hola = Utils.exec(`bash -c "for dispositivo in $(upower -e); do upower -i $dispositivo; done | grep percentage | head -n 1 | awk '{print $2}'"`)
-                        console.log(hola)
-                    })
-                }`,
+                label: percentageBattery.bind(),
             }),
         ],
     })
@@ -239,23 +239,24 @@ function Menu() {
             children: [
                 Widget.Icon({
                     class_name: "menu-box-icon",
-                    icon: 'notifications-disabled-symbolic',
-                    size: 14,
+                    icon: 'notification-indicator-normal',
+                    size: 18,
                 }),
                 Widget.Icon({
                     class_name: "menu-box-icon",
-                    icon: 'bluetooth-active-symbolic',
-                    size: 14,
+                    icon: iconBluetooth.bind(),
+                    size: 18,
                 }),
                 Widget.Icon({
                     class_name: "menu-box-icon",
-                    icon: 'network-wireless-connected-symbolic',
-                    size: 14,
+                    icon: iconWifi.bind(),
+                    size: 18,
                 }),
             ],
         }),
-        //onClicked: () => Utils.exec(`bash -c "~/.config/ags/panels/launch.sh launchsidebar"`),
-        onClicked: () => Utils.execAsync(['bash', '-c', '~/.config/ags/panels/launch.sh launchsidebar']),
+        onClicked: () => Utils.execAsync(['bash', '-c', 'bash ~/.config/ags/launch.sh launchsidebar'])
+                    .then(out => print(out))
+                    .catch(err => print(err)),
     })
 }
 
@@ -342,11 +343,12 @@ function CornerScreen(monitor = 0) {
     })
 }
 
+App.addIcons(`${App.configDir}/assets`)
+
 App.config({
     style: "./style.css",
-    icons: "./assets",
     windows: [
-        Bar(),
+        Bar(), 
         CornerScreen(),
 
         // you can call it, for each monitor
@@ -355,7 +357,7 @@ App.config({
     ],
     gtkTheme: "Adwaita-dark",
     cursorTheme: "Qogir",
-    iconTheme: "Papirus-Light",
+    iconTheme: "Papirus",
     //iconTheme: "MoreWaita",
     closeWindowDelay: {
         "window-name": 500, // milliseconds
