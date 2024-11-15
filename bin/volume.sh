@@ -10,15 +10,15 @@ notify_id=1024
 
 
 function get_percentage {
-    amixer -D pulse get Master | grep '%' | awk '{print$5}' | grep -o '[0-9]\+%'
+    amixer get Master | grep '%' | awk '{print$5}' | grep -o '[0-9]\+%'
 }
 
 function get_volume {
-    amixer -D pulse get Master | grep '%' | head -n 1 | cut -d '[' -f 2 | cut -d '%' -f 1
+    amixer get Master | grep '%' | head -n 1 | cut -d '[' -f 2 | cut -d '%' -f 1
 }
 
 function is_mute {
-    amixer -D pulse get Master | grep '%' | grep -oE '[^ ]+$' | grep off > /dev/null
+    amixer get Master | grep '%' | grep -oE '[^ ]+$' | grep off > /dev/null
 }
 
 function send_notification {
@@ -33,19 +33,19 @@ function send_notification {
 case $1 in
     up)
 	# Set the volume on (if it was muted)
-	amixer -D pulse set Master on > /dev/null
+	amixer set Master on > /dev/null
 	# Up the volume (+ 5%)
-	amixer -D pulse sset Master 5%+ > /dev/null
+	amixer sset Master 5%+ > /dev/null
 	send_notification
 	;;
     down)
-	amixer -D pulse set Master on > /dev/null
-	amixer -D pulse sset Master 5%- > /dev/null
+	amixer set Master on > /dev/null
+	amixer sset Master 5%- > /dev/null
 	send_notification
 	;;
-    mute)
+    toggle)
     	# Toggle mute
-	amixer -D pulse set Master 1+ toggle > /dev/null
+	amixer set Master 1+ toggle > /dev/null
     dunstify -r $notify_id -u normal -i ${icon_path}volume-mute.svg "Mute" -t 2000
 	;;
 esac

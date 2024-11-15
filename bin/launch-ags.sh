@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-ags -q 
+ags -q --bus-name bar -c ~/.config/ags/config.js
 sleep 5 &
-ags 
+ags --bus-name bar -c ~/.config/ags/config.js
