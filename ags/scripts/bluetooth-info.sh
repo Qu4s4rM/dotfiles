@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function get_name {
-    state=`bluetoothctl show | grep "Powered" | awk '{print $2}'`
+    state=`bluetoothctl show | grep "Pairable" | awk '{print $2}'`
     if [ $state == "yes" ]; then
         bluetoothctl info | grep "Alias" | awk '{print $2}'
     elif [ $state == "no" ]; then
