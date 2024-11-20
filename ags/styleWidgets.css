@@ -5,21 +5,35 @@ window.wifi {
 
 .center-box-wifi {
     background: #100d10; 
-    padding: 10px;
     font-weight: bold;
     border-radius: 14px;
 }
 
 .list-networks {
     background: #52434B;
+    padding: 10px 20px;
     margin: 10px 0px;
 }
+.information {
+    background: #52434B;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.connect-network {
+    margin: 20px 0px;
+}
 
+.exit {
+    all: unset;
+    background: none;
+}
 .switch {
     all: unset;
     background: none;
 }
-
+.icon-wifi {
+    all: unset;
+}
 .input {
     all: unset;
     background: #242424;

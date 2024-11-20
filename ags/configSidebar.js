@@ -27,6 +27,7 @@ function MenuSidebar(){
                 children: [
                     Widget.Button({
                         class_name: "sidebar-menu-child-btn",
+                        cursor: "pointer",
                         child: Widget.Box({
                             spacing: 10,
                             children: [
@@ -39,13 +40,18 @@ function MenuSidebar(){
                                 }),
                             ],
                         }),
+                        onClicked: () => Utils.execAsync(['bash', '-c', 'bash ~/.config/ags/launch.sh launchwifi'])
+                                .then(out => print(out))
+                                .catch(err => print(err)),
                     }),
                     Widget.Button({
                         class_name: "sidebar-menu-child-btn",
+                        cursor: "pointer",
                         child: Widget.Label("Device control"),
                     }),
                     Widget.Button({
                         class_name: "sidebar-menu-child-btn",
+                        cursor: "pointer",
                         child: Widget.Label("Do not disturb"),
                     }),
                 ],
@@ -57,6 +63,7 @@ function MenuSidebar(){
                 children: [
                     Widget.Button({
                         class_name: "sidebar-menu-child-btn",
+                        cursor: "pointer",
                         child: Widget.Box({
                             spacing: 10,
                             children: [
@@ -69,13 +76,18 @@ function MenuSidebar(){
                                 }),
                             ],
                         }),
+                        onClicked: () => Utils.execAsync(['bash', '-c', 'blueberry'])
+                            .then(out => print(out))
+                            .catch(err => print(err)),
                     }),
                     Widget.Button({
                         class_name: "sidebar-menu-child-btn",
+                        cursor: "pointer",
                         child: Widget.Label("Eye comfort shiled"),
                     }),
                     Widget.Button({
                         class_name: "sidebar-menu-child-btn",
+                        cursor: "pointer",
                         child: Widget.Label("Dark mode"),
                     }),
                 ],
@@ -117,6 +129,7 @@ function MenuOptions(){
         children: [
             Widget.Button({
                 class_name: "options-menu-btn",
+                cursor: "pointer",
                 child: Widget.Icon({
                     icon: "preferences-system-notifications-symbolic",
                     size: 20,
@@ -125,6 +138,7 @@ function MenuOptions(){
             }),
             Widget.Button({
                 class_name: "options-menu-btn",
+                cursor: "pointer",
                 child: Widget.Icon({
                     icon: "preferences-system-notifications-symbolic",
                     size: 20,

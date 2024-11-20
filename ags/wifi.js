@@ -28,17 +28,31 @@ function Information(){
     return Widget.Box({
         class_name: "information",
         spacing: 10,
-        cursor: "text",
         homogeneous: true,
         children: [
+            Widget.Button({
+                class_name: "exit",
+                cursor: "pointer",
+                child: Widget.Icon({
+                    icon: "close",
+                    size: 30,
+                }),
+                onClicked: () => Utils.execAsync(['bash', '-c', 'bash ~/.config/ags/launch.sh launchwifi']),
+            }),
             Widget.Label({
                 label: "Connected to:",
             }),
             Widget.Label({
                 label: nameWifi.bind(),
             }),
+            Widget.Icon({
+                class_name: "icon-wifi",
+                icon: iconWifi.bind(),
+                size: 25,
+            }),
             Widget.Button({
                 class_name: "switch",
+                cursor: "pointer",
                 child: Widget.Icon({
                     icon: switchWifi.bind(),
                     size: 40,
@@ -52,10 +66,8 @@ function Information(){
 function ListNetworks(){
     return Widget.Box({
         class_name: "list-networks",
-        spacing: 10,
-        vertical: false,
         cursor: "text",
-        homogeneous: true,
+        hpack: "fill",
         children: [
             Widget.Label({
                 label: namesWifi.bind(),
@@ -105,7 +117,6 @@ function ConnectNetwork(){
 // layout of the bar
 function Top() {
     return Widget.Box({
-        spacing: 8,
         children: [
             Information(),
         ],
@@ -123,11 +134,13 @@ function Center() {
 
 function Bottom() {
     return Widget.Box({
-        spacing: 8,
         vertical: true,
-        hpack: "start",
         children: [
-            Widget.Label("Visible Networks"),
+            Widget.Label({
+                label: "Visible Networks",
+                hpack: "fill",
+                justification: 'left',
+            }),
             ListNetworks(),
         ],
     })
