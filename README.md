@@ -12,5 +12,6 @@
   
   
 </p>
-# Instalación
+# Esta es una instalación con Arch Limpio, recien instalado
 ## Lo primero es instalar los siguientes paquetes:
+
